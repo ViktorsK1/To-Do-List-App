@@ -1,0 +1,30 @@
+PODS:
+  - PinLayout (1.10.2)
+  - Realm (10.25.2):
+    - Realm/Headers (= 10.25.2)
+  - Realm/Headers (10.25.2)
+  - RealmSwift (10.25.2):
+    - Realm (= 10.25.2)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - PinLayout
+  - RealmSwift
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - PinLayout
+    - Realm
+    - RealmSwift
+    - SnapKit
+
+SPEC CHECKSUMS:
+  PinLayout: d6b1960e4b182b4da1481b9aa6728f621e20708d
+  Realm: 978303663d0509166498f423d112e5ee97d4c91b
+  RealmSwift: a0c30c1efc49e928a0a6f8fb141bb2629616d79b
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: e4e457ad87fcd6c51ebd1c32d756118b6604495c
+
+COCOAPODS: 1.11.2
