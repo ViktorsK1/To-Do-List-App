@@ -11,8 +11,7 @@ import RealmSwift
 class CategoryViewController: UIViewController {
 
     private let mainView = CategoryView()
-    private var categories = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var categories: Results<Category>?
     let realm = try! Realm()
     
     override func loadView() {
@@ -73,15 +72,10 @@ class CategoryViewController: UIViewController {
     }
     
     func loadCategories() {
-//        let request: NSFetchRequest<Category> = Category.fetchRequest()
-//        
-//        do {
-//        categories = try context.fetch(request)
-//        } catch {
-//            print("Error loading categories \(error)")
-//        }
-//        
-//        mainView.categoryTableView.reloadData()
+        
+        categories = realm.objects(Category.self)
+        
+        mainView.categoryTableView.reloadData()
     }
     
     //MARK: - Add new Categories
@@ -92,8 +86,6 @@ class CategoryViewController: UIViewController {
         let action = UIAlertAction(title: "Add", style: .default) { action in
             let newCategory = Category()
             newCategory.name = textField.text ?? ""
-            
-            self.categories.append(newCategory)
             
             self.save(category: newCategory)
             
@@ -119,13 +111,13 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - TableViewDataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        categories.count
+        categories?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! CategoryCell
-        let category = categories[indexPath.row]
-        cell.applyCategory(text: category.name ?? "")
+        let category = categories?[indexPath.row]
+        cell.applyCategory(text: category?.name ?? "No Categories Added yet")
         
         return cell
     }
@@ -138,7 +130,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         mainView.categoryTableView.deselectRow(at: indexPath, animated: true)
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            vc.selectedCategory = categories[indexPath.row]
+            vc.selectedCategory = categories?[indexPath.row]
         }
     }
 

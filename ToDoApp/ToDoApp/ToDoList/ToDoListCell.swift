@@ -10,7 +10,7 @@ import SnapKit
 
 class ToDoListCell: UITableViewCell {
 
-    private let textInputLabel: UILabel = {
+    let textInputLabel: UILabel = {
         let uiLabel = UILabel()
         uiLabel.numberOfLines = 0
         return uiLabel
