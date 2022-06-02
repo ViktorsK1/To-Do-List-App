@@ -8,12 +8,26 @@
 import UIKit
 import RealmSwift
 
+protocol CategoryViewDelegate: AnyObject {
+    func onCategoryRetrieval(names: [String])
+    func onCategoryAddSuccess(name: String)
+    func onCategoryAddFailure(message: String)
+    func onCategoryDeletion(index: Int)
+}
+
 class CategoryViewController: UIViewController {
 
+    //MARK: - Properties
     private let mainView = CategoryView()
-    private var categories: Results<Category>?
-    let realm = try! Realm()
+    var names: [String] = []
     
+//    var presenter: CategoryPresenter!
+    var presenterDelegate: CategoryPresenterDelegate?
+//    weak private var categoryPresenterDelegate: CategoryPresenterDelegate?
+//    weak var presenterDelegate: CategoryPresenterDelegate?
+    
+    
+    //MARK: - Lifrcycle Methods
     override func loadView() {
         view = mainView
     }
@@ -22,9 +36,15 @@ class CategoryViewController: UIViewController {
 
         setupTableView()
         setupNavigationController()
-        loadCategories()
+//        loadCategoryModel()
+        
+        presenterDelegate?.viewDidLoad()
+        
+//        self.categoryViewOutputDelegate = presenter
+//        self.categoryViewOutputDelegate?.getData()
     }
     
+    //MARK: - TableView Setup
     private func setupTableView() {
         mainView.categoryTableView.delegate = self
         mainView.categoryTableView.dataSource = self
@@ -35,6 +55,7 @@ class CategoryViewController: UIViewController {
         }
     }
     
+    //MARK: - NavigationController Setup
     private func setupNavigationController() {
         navigationController?.navigationBar.barTintColor = UIColor.systemBlue
         navigationController?.navigationBar.isTranslucent = false
@@ -49,7 +70,7 @@ class CategoryViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         }
         
-        navigationItem.title = "To Do List"
+        navigationItem.title = "Category"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem?.tintColor = .white
         
@@ -58,80 +79,124 @@ class CategoryViewController: UIViewController {
     
     //MARK: - Data Manipulation methods
     
-    func save(category: Category) {
-        
-        do {
-            try realm.write({
-                realm.add(category)
-            })
-        } catch {
-            print("Error saving category \(error)")
-        }
-        
-        mainView.categoryTableView.reloadData()
-    }
+//    func saveCategories(category: CategoryModel) {
+//
+//        do {
+//            try realm.write({
+//                realm.add(category)
+//            })
+//        } catch {
+//            print("Error saving category \(error)")
+//        }
+//
+//        mainView.categoryTableView.reloadData()
+//    }
     
-    func loadCategories() {
-        
-        categories = realm.objects(Category.self)
-        
-        mainView.categoryTableView.reloadData()
-    }
     
-    //MARK: - Add new Categories
+    
+//    func loadCategoryModel() {
+//        
+//        categoryModel = realm.objects(CategoryModel.self)
+//        
+//        mainView.categoryTableView.reloadData()
+//    }
+    
+    //MARK: - Actions
     
     @objc private func addButtonPressed() {
-        var textField = UITextField()
+//        var textField = UITextField()
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add", style: .default) { action in
-            let newCategory = Category()
-            newCategory.name = textField.text ?? ""
-            
-            self.save(category: newCategory)
-            
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        //        let add = UIAlertAction(title: "Add", style: .default) { action in
+        ////            let newCategory = Category()
+        ////            newCategory.name = textField.text ?? ""
+        //
+        ////            self.saveCategories(category: newCategory)
+        //
+        //        }
+        
+        //        alert.addTextField { field in
+        //            textField = field
+        //            textField.placeholder = "Add a new category"
+        //        }
+        
+        let add = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            if let name = alert.textFields?.first!.text, !name.isEmpty {
+                // presenter method
+                self?.presenterDelegate?.addButtonPressed(with: name)
+            }
         }
-        
-        alert.addAction(action)
-        
-        alert.addTextField { field in
-            textField = field
+        alert.addTextField { textField in
             textField.placeholder = "Add a new category"
         }
         
-        present(alert, animated: true, completion: nil)
+        alert.addAction(cancel)
+        alert.addAction(add)
+        
+
+
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    
-    
 }
 
-
-extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
+//MARK: - TableViewDataSource methods
+extension CategoryViewController: UITableViewDataSource {
     
-    //MARK: - TableViewDataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        mainView.categoryTableView.isHidden = self.names.isEmpty
         
-        categories?.count ?? 1
+        return self.names.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! CategoryCell
-        let category = categories?[indexPath.row]
-        cell.applyCategory(text: category?.name ?? "No Categories Added yet")
-        
+        cell.categoryLabel.text = names[indexPath.row]
+//        cell.applyCategory(text: category?.name ?? "No Categories Added yet")
         return cell
     }
     
-    //MARK: - TableViewDelegate methods
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenterDelegate?.deleteSelected(for: indexPath.row)
+        }
+    }
+}
+
+//MARK: - TableViewDelegate method
+extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ToDoListViewController()
         navigationController?.pushViewController(vc, animated: true)
         mainView.categoryTableView.deselectRow(at: indexPath, animated: true)
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            vc.selectedCategory = categories?[indexPath.row]
-        }
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            vc.selectedCategory = categoryModel?[indexPath.row]
+//        }
     }
+}
 
+//MARK: CategoryViewDelegate 
+extension CategoryViewController: CategoryViewDelegate {
+    
+    func onCategoryRetrieval(names: [String]) {
+        print("View recives thr result from the Presenter.")
+        self.names = names
+        self.mainView.categoryTableView.reloadData()
+    }
+    
+    func onCategoryAddSuccess(name: String) {
+        print("View recieves the result from the Presenter.")
+        self.names.append(name)
+        self.mainView.categoryTableView.reloadData()
+    }
+    
+    func onCategoryAddFailure(message: String) {
+        print("View recieves a failure result from the Presenter: \(message)")
+    }
+    
+    func onCategoryDeletion(index: Int) {
+        print("View recieves a deletion result from the Presenter")
+        self.names.remove(at: index)
+        self.mainView.categoryTableView.reloadData()
+    }
 }

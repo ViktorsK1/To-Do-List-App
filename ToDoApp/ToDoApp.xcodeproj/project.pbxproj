@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1BDD596242A482EE72D6A74D /* Pods_ToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC621E0E3BD0F4B4C6349EFD /* Pods_ToDoApp.framework */; };
+		5EB0BF51283D33D6001C68FF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0BF50283D33D6001C68FF /* RealmManager.swift */; };
+		5EB0BF53283EBB9B001C68FF /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */; };
 		5EB8895A281E918600C3FCAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB88959281E918600C3FCAA /* AppDelegate.swift */; };
 		5EB8895C281E918600C3FCAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8895B281E918600C3FCAA /* SceneDelegate.swift */; };
 		5EB8895E281E918600C3FCAA /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8895D281E918600C3FCAA /* ToDoListViewController.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		25E19BE7802BB81D8D85E0A9 /* Pods-ToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-ToDoApp/Pods-ToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5EB0BF50283D33D6001C68FF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		5EB88956281E918600C3FCAA /* ToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB88959281E918600C3FCAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EB8895B281E918600C3FCAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +66,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5E7EEE4F2847D57F00DCC37B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5EB88959281E918600C3FCAA /* AppDelegate.swift */,
+				5EB8895B281E918600C3FCAA /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5E7EEE502847D5B200DCC37B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5E7EEE512847D5BC00DCC37B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5E7EEE522847D5C800DCC37B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5EB8894D281E918600C3FCAA = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +117,10 @@
 		5EB88958281E918600C3FCAA /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
-				5EB88959281E918600C3FCAA /* AppDelegate.swift */,
-				5EB8895B281E918600C3FCAA /* SceneDelegate.swift */,
+				5E7EEE4F2847D57F00DCC37B /* App */,
+				5E7EEE502847D5B200DCC37B /* Presenter */,
+				5E7EEE512847D5BC00DCC37B /* View */,
+				5E7EEE522847D5C800DCC37B /* Model */,
 				5EB8897A28252B2700C3FCAA /* Category */,
 				5EB88974281F0DBF00C3FCAA /* ToDoList */,
 				5EB88973281F0D5500C3FCAA /* Data Model */,
@@ -100,6 +136,7 @@
 			children = (
 				5EB889852826DE6700C3FCAA /* Category.swift */,
 				5EB889832826DE5A00C3FCAA /* Item.swift */,
+				5EB0BF50283D33D6001C68FF /* RealmManager.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -134,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				5EB8897B28252B7200C3FCAA /* CategoryViewController.swift */,
+				5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */,
 				5EB8897D28252CBA00C3FCAA /* CategoryView.swift */,
 				5EB8897F28252FAB00C3FCAA /* CategoryCell.swift */,
 			);
@@ -265,7 +303,9 @@
 			files = (
 				5EB889842826DE5A00C3FCAA /* Item.swift in Sources */,
 				5EB8895E281E918600C3FCAA /* ToDoListViewController.swift in Sources */,
+				5EB0BF51283D33D6001C68FF /* RealmManager.swift in Sources */,
 				5EB8896E281E982000C3FCAA /* ToDoListView.swift in Sources */,
+				5EB0BF53283EBB9B001C68FF /* CategoryPresenter.swift in Sources */,
 				5EB8897C28252B7200C3FCAA /* CategoryViewController.swift in Sources */,
 				5EB8895A281E918600C3FCAA /* AppDelegate.swift in Sources */,
 				5EB8898028252FAB00C3FCAA /* CategoryCell.swift in Sources */,

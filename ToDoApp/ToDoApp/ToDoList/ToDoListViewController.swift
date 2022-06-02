@@ -32,7 +32,7 @@ class ToDoListViewController: UIViewController {
         setupSearchBar()
         setupTableView()
         setupNavigationController()
-//        loadItems()
+        loadItems()
     }
     
     private func setupSearchBar() {
@@ -89,6 +89,7 @@ class ToDoListViewController: UIViewController {
                     print("Error saving new items, \(error)")
                 }
             }
+//            loadItems()
             mainView.itemsTableView.reloadData()
             
             

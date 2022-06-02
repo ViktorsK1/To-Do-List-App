@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
 
-    private let categoryLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let uiLabel = UILabel()
         uiLabel.numberOfLines = 0
         return uiLabel
