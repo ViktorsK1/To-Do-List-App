@@ -19,10 +19,8 @@ class CategoryPresenter: CategoryPresenterDelegate {
     
     weak var viewDelegate: CategoryViewDelegate?
     
-    
     private var categories: Results<Category>?
     private var realm = try! Realm()
-//    private let realmManager = RealmManager()
     
     required init(view: CategoryViewDelegate) {
         self.viewDelegate = view
@@ -65,8 +63,6 @@ class CategoryPresenter: CategoryPresenterDelegate {
         }
     }
     
-    
-    
     //MARK: - CategoryPresenterDelegate
     func viewDidLoad() {
         print("View notifies the Presenter that it has loaded")
@@ -82,39 +78,4 @@ class CategoryPresenter: CategoryPresenterDelegate {
         print("View notifies the Presenter that a delete action was performed.")
         deleteCategory(at: index)
     }
-    
-    
 }
-
-//class CategoryPresenter {
-//    
-//    weak var categoryViewInputDelegate: CategoryViewDelegate?
-//    private var categories: Results<Category>?
-//    
-//    func setCategoryViewInputDelegate(categoryViewInputDelegate: CategoryViewDelegate?) {
-//        self.categoryViewInputDelegate = categoryViewInputDelegate
-//    }
-//    
-//    private func saveCategory() {
-//        RealmManager.shared.createModel(model: categoryModel)
-//        self.categoryViewInputDelegate?.displayData()
-//    }
-//    
-//    private func loadCategory() {
-//        RealmManager.shared.readModel(model: Category.self)
-//    }
-//}
-
-//extension CategoryPresenter: CategoryViewOutputDelegate {
-//    func getData() {
-//
-//    }
-//
-//    func saveData() {
-//        saveCategory()
-//    }
-//
-//    func loadData() {
-//        loadCategory()
-//    }
-//}

@@ -21,12 +21,8 @@ class CategoryViewController: UIViewController {
     private let mainView = CategoryView()
     var names: [String] = []
     
-//    var presenter: CategoryPresenter!
-    var presenterDelegate: CategoryPresenterDelegate?
-//    weak private var categoryPresenterDelegate: CategoryPresenterDelegate?
-//    weak var presenterDelegate: CategoryPresenterDelegate?
-    
-    
+    lazy var presenterDelegate: CategoryPresenterDelegate? = CategoryPresenter(view: self)
+
     //MARK: - Lifrcycle Methods
     override func loadView() {
         view = mainView
@@ -36,12 +32,8 @@ class CategoryViewController: UIViewController {
 
         setupTableView()
         setupNavigationController()
-//        loadCategoryModel()
         
         presenterDelegate?.viewDidLoad()
-        
-//        self.categoryViewOutputDelegate = presenter
-//        self.categoryViewOutputDelegate?.getData()
     }
     
     //MARK: - TableView Setup
@@ -49,7 +41,7 @@ class CategoryViewController: UIViewController {
         mainView.categoryTableView.delegate = self
         mainView.categoryTableView.dataSource = self
         mainView.categoryTableView.register(CategoryCell.self, forCellReuseIdentifier: "reuseIdentifierTableView")
-//        mainView.categoryTableView.separatorInset = .zero
+        mainView.categoryTableView.separatorInset = .zero
         if #available(iOS 15.0, *) {
             mainView.categoryTableView.sectionHeaderTopPadding = .zero
         }
@@ -73,85 +65,39 @@ class CategoryViewController: UIViewController {
         navigationItem.title = "Category"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem?.tintColor = .white
-        
     }
 
-    
-    //MARK: - Data Manipulation methods
-    
-//    func saveCategories(category: CategoryModel) {
-//
-//        do {
-//            try realm.write({
-//                realm.add(category)
-//            })
-//        } catch {
-//            print("Error saving category \(error)")
-//        }
-//
-//        mainView.categoryTableView.reloadData()
-//    }
-    
-    
-    
-//    func loadCategoryModel() {
-//        
-//        categoryModel = realm.objects(CategoryModel.self)
-//        
-//        mainView.categoryTableView.reloadData()
-//    }
-    
     //MARK: - Actions
-    
     @objc private func addButtonPressed() {
-//        var textField = UITextField()
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        //        let add = UIAlertAction(title: "Add", style: .default) { action in
-        ////            let newCategory = Category()
-        ////            newCategory.name = textField.text ?? ""
-        //
-        ////            self.saveCategories(category: newCategory)
-        //
-        //        }
-        
-        //        alert.addTextField { field in
-        //            textField = field
-        //            textField.placeholder = "Add a new category"
-        //        }
-        
         let add = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             if let name = alert.textFields?.first!.text, !name.isEmpty {
                 // presenter method
                 self?.presenterDelegate?.addButtonPressed(with: name)
             }
         }
+        
         alert.addTextField { textField in
             textField.placeholder = "Add a new category"
         }
-        
         alert.addAction(cancel)
         alert.addAction(add)
         
-
-
         self.present(alert, animated: true, completion: nil)
     }
 }
 
 //MARK: - TableViewDataSource methods
 extension CategoryViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         mainView.categoryTableView.isHidden = self.names.isEmpty
-        
         return self.names.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! CategoryCell
         cell.categoryLabel.text = names[indexPath.row]
-//        cell.applyCategory(text: category?.name ?? "No Categories Added yet")
         return cell
     }
     

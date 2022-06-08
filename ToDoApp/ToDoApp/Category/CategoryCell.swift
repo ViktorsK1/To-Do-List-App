@@ -35,8 +35,4 @@ class CategoryCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
-    
-    func applyCategory(text: String) {
-        categoryLabel.text = "\(text)"
-    }
 }
