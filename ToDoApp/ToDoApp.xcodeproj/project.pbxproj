@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1BDD596242A482EE72D6A74D /* Pods_ToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC621E0E3BD0F4B4C6349EFD /* Pods_ToDoApp.framework */; };
+		5EABC5BF2850934B0097B476 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EABC5BE2850934B0097B476 /* ItemViewController.swift */; };
+		5EABC5C12850BFC10097B476 /* ItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EABC5C02850BFC10097B476 /* ItemPresenter.swift */; };
 		5EB0BF51283D33D6001C68FF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0BF50283D33D6001C68FF /* RealmManager.swift */; };
 		5EB0BF53283EBB9B001C68FF /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */; };
 		5EB8895A281E918600C3FCAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB88959281E918600C3FCAA /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		25E19BE7802BB81D8D85E0A9 /* Pods-ToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-ToDoApp/Pods-ToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5EABC5BE2850934B0097B476 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		5EABC5C02850BFC10097B476 /* ItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPresenter.swift; sourceTree = "<group>"; };
 		5EB0BF50283D33D6001C68FF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		5EB88956281E918600C3FCAA /* ToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				5EB8895D281E918600C3FCAA /* ToDoListViewController.swift */,
+				5EABC5BE2850934B0097B476 /* ItemViewController.swift */,
+				5EABC5C02850BFC10097B476 /* ItemPresenter.swift */,
 				5EB8896D281E982000C3FCAA /* ToDoListView.swift */,
 				5EB8896F281EB70A00C3FCAA /* ToDoListCell.swift */,
 			);
@@ -302,8 +308,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EB889842826DE5A00C3FCAA /* Item.swift in Sources */,
+				5EABC5C12850BFC10097B476 /* ItemPresenter.swift in Sources */,
 				5EB8895E281E918600C3FCAA /* ToDoListViewController.swift in Sources */,
 				5EB0BF51283D33D6001C68FF /* RealmManager.swift in Sources */,
+				5EABC5BF2850934B0097B476 /* ItemViewController.swift in Sources */,
 				5EB8896E281E982000C3FCAA /* ToDoListView.swift in Sources */,
 				5EB0BF53283EBB9B001C68FF /* CategoryPresenter.swift in Sources */,
 				5EB8897C28252B7200C3FCAA /* CategoryViewController.swift in Sources */,

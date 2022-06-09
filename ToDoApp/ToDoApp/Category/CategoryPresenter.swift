@@ -17,11 +17,13 @@ protocol CategoryPresenterDelegate: AnyObject {
 
 class CategoryPresenter: CategoryPresenterDelegate {
     
+    //MARK: - Properties
     weak var viewDelegate: CategoryViewDelegate?
     
     private var categories: Results<Category>?
     private var realm = try! Realm()
     
+    //MARK: - Initializers
     required init(view: CategoryViewDelegate) {
         self.viewDelegate = view
     }

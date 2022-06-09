@@ -12,4 +12,9 @@ class Item: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var done: Bool = false
     var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+    
+    convenience init(title: String) {
+        self.init()
+        self.title = title
+    }
 }

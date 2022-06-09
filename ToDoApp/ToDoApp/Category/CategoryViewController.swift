@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealmSwift
+//import RealmSwift
 
 protocol CategoryViewDelegate: AnyObject {
     func onCategoryRetrieval(names: [String])
@@ -21,12 +21,13 @@ class CategoryViewController: UIViewController {
     private let mainView = CategoryView()
     var names: [String] = []
     
-    lazy var presenterDelegate: CategoryPresenterDelegate? = CategoryPresenter(view: self)
+    private lazy var presenterDelegate: CategoryPresenterDelegate? = CategoryPresenter(view: self)
 
     //MARK: - Lifrcycle Methods
     override func loadView() {
         view = mainView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,7 +72,7 @@ class CategoryViewController: UIViewController {
     @objc private func addButtonPressed() {
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        let add = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+        let add = UIAlertAction(title: "Add Category", style: .default) { [weak self] _ in
             if let name = alert.textFields?.first!.text, !name.isEmpty {
                 // presenter method
                 self?.presenterDelegate?.addButtonPressed(with: name)
