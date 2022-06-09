@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ToDoListView: UIView {
+class ItemView: UIView {
 
     let itemsTableView: UITableView = {
         let uiTableView = UITableView()

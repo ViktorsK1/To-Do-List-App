@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ToDoListCell: UITableViewCell {
+class ItemCell: UITableViewCell {
 
     let textInputLabel: UILabel = {
         let uiLabel = UILabel()

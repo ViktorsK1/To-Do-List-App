@@ -17,8 +17,8 @@
 		5EB8895E281E918600C3FCAA /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8895D281E918600C3FCAA /* ToDoListViewController.swift */; };
 		5EB88963281E918C00C3FCAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB88962281E918C00C3FCAA /* Assets.xcassets */; };
 		5EB88966281E918C00C3FCAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EB88964281E918C00C3FCAA /* LaunchScreen.storyboard */; };
-		5EB8896E281E982000C3FCAA /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8896D281E982000C3FCAA /* ToDoListView.swift */; };
-		5EB88970281EB70A00C3FCAA /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8896F281EB70A00C3FCAA /* ToDoListCell.swift */; };
+		5EB8896E281E982000C3FCAA /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8896D281E982000C3FCAA /* ItemView.swift */; };
+		5EB88970281EB70A00C3FCAA /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8896F281EB70A00C3FCAA /* ItemCell.swift */; };
 		5EB8897C28252B7200C3FCAA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8897B28252B7200C3FCAA /* CategoryViewController.swift */; };
 		5EB8897E28252CBA00C3FCAA /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8897D28252CBA00C3FCAA /* CategoryView.swift */; };
 		5EB8898028252FAB00C3FCAA /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB8897F28252FAB00C3FCAA /* CategoryCell.swift */; };
@@ -39,8 +39,8 @@
 		5EB88962281E918C00C3FCAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EB88965281E918C00C3FCAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EB88967281E918C00C3FCAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EB8896D281E982000C3FCAA /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
-		5EB8896F281EB70A00C3FCAA /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
+		5EB8896D281E982000C3FCAA /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		5EB8896F281EB70A00C3FCAA /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		5EB8897B28252B7200C3FCAA /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		5EB8897D28252CBA00C3FCAA /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		5EB8897F28252FAB00C3FCAA /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		5E7EEE502847D5B200DCC37B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */,
+				5EABC5C02850BFC10097B476 /* ItemPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -89,6 +91,10 @@
 		5E7EEE512847D5BC00DCC37B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5EB8897B28252B7200C3FCAA /* CategoryViewController.swift */,
+				5EB8897D28252CBA00C3FCAA /* CategoryView.swift */,
+				5EABC5BE2850934B0097B476 /* ItemViewController.swift */,
+				5EB8896D281E982000C3FCAA /* ItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +102,8 @@
 		5E7EEE522847D5C800DCC37B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5EB889852826DE6700C3FCAA /* Category.swift */,
+				5EB889832826DE5A00C3FCAA /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,32 +135,26 @@
 				5E7EEE522847D5C800DCC37B /* Model */,
 				5EB8897A28252B2700C3FCAA /* Category */,
 				5EB88974281F0DBF00C3FCAA /* ToDoList */,
-				5EB88973281F0D5500C3FCAA /* Data Model */,
-				5EB88976281F0DFE00C3FCAA /* Views */,
+				5EB88973281F0D5500C3FCAA /* Realm Manager */,
 				5EB88975281F0DDB00C3FCAA /* Supporting files */,
 				5EB88967281E918C00C3FCAA /* Info.plist */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
 		};
-		5EB88973281F0D5500C3FCAA /* Data Model */ = {
+		5EB88973281F0D5500C3FCAA /* Realm Manager */ = {
 			isa = PBXGroup;
 			children = (
-				5EB889852826DE6700C3FCAA /* Category.swift */,
-				5EB889832826DE5A00C3FCAA /* Item.swift */,
 				5EB0BF50283D33D6001C68FF /* RealmManager.swift */,
 			);
-			path = "Data Model";
+			path = "Realm Manager";
 			sourceTree = "<group>";
 		};
 		5EB88974281F0DBF00C3FCAA /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
 				5EB8895D281E918600C3FCAA /* ToDoListViewController.swift */,
-				5EABC5BE2850934B0097B476 /* ItemViewController.swift */,
-				5EABC5C02850BFC10097B476 /* ItemPresenter.swift */,
-				5EB8896D281E982000C3FCAA /* ToDoListView.swift */,
-				5EB8896F281EB70A00C3FCAA /* ToDoListCell.swift */,
+				5EB8896F281EB70A00C3FCAA /* ItemCell.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -166,19 +168,9 @@
 			path = "Supporting files";
 			sourceTree = "<group>";
 		};
-		5EB88976281F0DFE00C3FCAA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		5EB8897A28252B2700C3FCAA /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				5EB8897B28252B7200C3FCAA /* CategoryViewController.swift */,
-				5EB0BF52283EBB9B001C68FF /* CategoryPresenter.swift */,
-				5EB8897D28252CBA00C3FCAA /* CategoryView.swift */,
 				5EB8897F28252FAB00C3FCAA /* CategoryCell.swift */,
 			);
 			path = Category;
@@ -312,12 +304,12 @@
 				5EB8895E281E918600C3FCAA /* ToDoListViewController.swift in Sources */,
 				5EB0BF51283D33D6001C68FF /* RealmManager.swift in Sources */,
 				5EABC5BF2850934B0097B476 /* ItemViewController.swift in Sources */,
-				5EB8896E281E982000C3FCAA /* ToDoListView.swift in Sources */,
+				5EB8896E281E982000C3FCAA /* ItemView.swift in Sources */,
 				5EB0BF53283EBB9B001C68FF /* CategoryPresenter.swift in Sources */,
 				5EB8897C28252B7200C3FCAA /* CategoryViewController.swift in Sources */,
 				5EB8895A281E918600C3FCAA /* AppDelegate.swift in Sources */,
 				5EB8898028252FAB00C3FCAA /* CategoryCell.swift in Sources */,
-				5EB88970281EB70A00C3FCAA /* ToDoListCell.swift in Sources */,
+				5EB88970281EB70A00C3FCAA /* ItemCell.swift in Sources */,
 				5EB8897E28252CBA00C3FCAA /* CategoryView.swift in Sources */,
 				5EB8895C281E918600C3FCAA /* SceneDelegate.swift in Sources */,
 				5EB889862826DE6700C3FCAA /* Category.swift in Sources */,

@@ -10,7 +10,7 @@ import RealmSwift
 
 class ToDoListViewController: UIViewController {
     
-    private let mainView = ToDoListView()
+    private let mainView = ItemView()
     private var todoItems: Results<Item>?
     let realm = try! Realm()
     var selectedCategory: Category? //{
@@ -42,7 +42,7 @@ class ToDoListViewController: UIViewController {
     private func setupTableView() {
         mainView.itemsTableView.delegate = self
         mainView.itemsTableView.dataSource = self
-        mainView.itemsTableView.register(ToDoListCell.self, forCellReuseIdentifier: "reuseIdentifierTableView")
+        mainView.itemsTableView.register(ItemCell.self, forCellReuseIdentifier: "reuseIdentifierTableView")
 //        mainView.itemsTableView.separatorInset = .zero
         if #available(iOS 15.0, *) {
             mainView.itemsTableView.sectionHeaderTopPadding = .zero
@@ -142,7 +142,7 @@ extension ToDoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! ToDoListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! ItemCell
         if let item = todoItems?[indexPath.row] {
 //            cell.apply(text: item.title)
             cell.textInputLabel.text = item.title

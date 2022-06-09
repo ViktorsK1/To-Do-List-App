@@ -17,7 +17,7 @@ protocol ItemViewDelegate: AnyObject {
 class ItemViewController: UIViewController {
 
     //MARK: - Properties
-    private let mainView = ToDoListView()
+    private let mainView = ItemView()
     var titles: [String] = []
     var doneTitles: [Bool] = []
     private lazy var presenterDelegate = ItemPresenter(view: self)
@@ -41,7 +41,7 @@ class ItemViewController: UIViewController {
     private func setupTableView() {
         mainView.itemsTableView.delegate = self
         mainView.itemsTableView.dataSource = self
-        mainView.itemsTableView.register(ToDoListCell.self, forCellReuseIdentifier: "reuseIdentifierTableView")
+        mainView.itemsTableView.register(ItemCell.self, forCellReuseIdentifier: "reuseIdentifierTableView")
 //        mainView.itemsTableView.separatorInset = .zero
         if #available(iOS 15.0, *) {
             mainView.itemsTableView.sectionHeaderTopPadding = .zero
@@ -113,7 +113,7 @@ extension ItemViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! ToDoListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifierTableView", for: indexPath) as! ItemCell
         cell.textInputLabel.text = titles[indexPath.row]
 //        if titles[indexPath.row] {
 //            cell.textInputLabel.text = item.title
