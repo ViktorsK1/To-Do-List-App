@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+//MARK: - CategoryPresenterDelegate 
 protocol CategoryPresenterDelegate: AnyObject {
     init(view: CategoryViewDelegate)
     func viewDidLoad()
@@ -16,18 +17,15 @@ protocol CategoryPresenterDelegate: AnyObject {
 }
 
 class CategoryPresenter: CategoryPresenterDelegate {
-    
     //MARK: - Properties
     weak var viewDelegate: CategoryViewDelegate?
     
     private var categories: Results<Category>?
     private var realm = try! Realm()
-    
     //MARK: - Initializers
     required init(view: CategoryViewDelegate) {
         self.viewDelegate = view
     }
-    
     //MARK: - Private methods
     private func retrieveCategories() {
         print("Presenter retrieves an Category objects from the Realm Database.")
@@ -64,8 +62,7 @@ class CategoryPresenter: CategoryPresenterDelegate {
             viewDelegate?.onCategoryDeletion(index: index)
         }
     }
-    
-    //MARK: - CategoryPresenterDelegate
+    //MARK: - CategoryPresenterDelegate methods
     func viewDidLoad() {
         print("View notifies the Presenter that it has loaded")
         retrieveCategories()

@@ -6,8 +6,8 @@
 //
 
 import UIKit
-//import RealmSwift
 
+//MARK: CategoryViewDelegate
 protocol CategoryViewDelegate: AnyObject {
     func onCategoryRetrieval(names: [String])
     func onCategoryAddSuccess(name: String)
@@ -16,13 +16,11 @@ protocol CategoryViewDelegate: AnyObject {
 }
 
 class CategoryViewController: UIViewController {
-
     //MARK: - Properties
     private let mainView = CategoryView()
     var names: [String] = []
     
     private lazy var presenterDelegate: CategoryPresenterDelegate? = CategoryPresenter(view: self)
-
     //MARK: - Lifrcycle Methods
     override func loadView() {
         view = mainView
@@ -36,7 +34,6 @@ class CategoryViewController: UIViewController {
         
         presenterDelegate?.viewDidLoad()
     }
-    
     //MARK: - TableView Setup
     private func setupTableView() {
         mainView.categoryTableView.delegate = self
@@ -47,7 +44,6 @@ class CategoryViewController: UIViewController {
             mainView.categoryTableView.sectionHeaderTopPadding = .zero
         }
     }
-    
     //MARK: - NavigationController Setup
     private func setupNavigationController() {
         navigationController?.navigationBar.barTintColor = UIColor.systemBlue
@@ -67,7 +63,6 @@ class CategoryViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
-
     //MARK: - Actions
     @objc private func addButtonPressed() {
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
@@ -88,7 +83,6 @@ class CategoryViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
-
 //MARK: - TableViewDataSource methods
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,21 +102,13 @@ extension CategoryViewController: UITableViewDataSource {
         }
     }
 }
-
 //MARK: - TableViewDelegate method
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ToDoListViewController()
-        navigationController?.pushViewController(vc, animated: true)
         mainView.categoryTableView.deselectRow(at: indexPath, animated: true)
-        
-//        if let indexPath = tableView.indexPathForSelectedRow {
-//            vc.selectedCategory = categoryModel?[indexPath.row]
-//        }
     }
 }
-
-//MARK: CategoryViewDelegate 
+//MARK: CategoryViewDelegate methods
 extension CategoryViewController: CategoryViewDelegate {
     
     func onCategoryRetrieval(names: [String]) {
